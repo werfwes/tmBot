@@ -30,6 +30,11 @@ while True:
                     if suc['success'] == True:
                         print(f"Цена для {i['i_name']} изменена!")
                         print(f"Новая цена: {str(float(price)/100)}")
+                else:
+                    suc = requests.get(f"https://market.csgo.com/api/SetPrice/{ui_id}/{(float(i['ui_price']) - (float(i['ui_price']) * minPercent))}/?key={KEY}").json()
+                    if suc['success'] == True:
+                        print(f"Цена для {i['i_name']} изменена!")
+                        print(f"Новая цена: {str(float(price) / 100)}")
 
 
             time.sleep(5)
