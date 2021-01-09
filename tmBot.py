@@ -25,10 +25,11 @@ while True:
 
             if minPrice['success'] == True:
                 price = str(float(minPrice['best_offer']) - (step * 100))
-                if (float(i['ui_price']) - (float(i['ui_price']) * minPercent)) < float(price):
-                    requests.get(f"https://market.csgo.com/api/SetPrice/{ui_id}/{price}/?key={KEY}")
-                    print(f"Цена для {i['i_name']} изменена!")
-                    print(f"Новая цена: {str(float(price)/100)}")
+                if ((float(i['ui_price']) - (float(i['ui_price']) * minPercent)) * 100) < float(price):
+                    suc = requests.get(f"https://market.csgo.com/api/SetPrice/{ui_id}/{price}/?key={KEY}")
+                    if suc['success'] == True:
+                        print(f"Цена для {i['i_name']} изменена!")
+                        print(f"Новая цена: {str(float(price)/100)}")
 
 
             time.sleep(5)
@@ -36,7 +37,7 @@ while True:
 
 
 
-        time.sleep(30)
+        time.sleep(180)
 
     except Exception as e:
         print(str(e))
